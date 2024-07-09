@@ -1,8 +1,10 @@
+
 import { useState } from 'react';
 function App() {
 
   const [task, setTask] = useState("");
-  const [taskList, setTaskList] = useState("");
+  const [items, setItems] = useState([]);
+
 
   const handleChange = e => {
     setTask(e.target.value)
@@ -10,7 +12,19 @@ function App() {
 
   const handleClick = e => {
     e.preventDefault();
-    setTaskList(task)
+
+    console.log(`Task variable: ${task}`)
+
+    const item = {
+      id: Math.floor(Math.random() * 1000),
+      value: task
+    };
+
+    setItems(prevList => [...prevList, item]);
+    console.log(items)
+
+    setTask("");
+
   }
   return (
     <>
@@ -26,7 +40,14 @@ function App() {
         >Add Task</button>
       </form>
       <ul>
-        <li>{taskList}</li>
+        {items.map(item => {
+          return (
+            <li
+              key={item.id}
+            >
+              {item.value}</li>
+          )
+        })}
       </ul>
 
     </>
