@@ -2,26 +2,25 @@
 import { useState } from 'react';
 function App() {
 
+  /*state variable that stores the task
+  entered in the input box*/
   const [task, setTask] = useState("");
-  const [items, setItems] = useState([]);
-
-
-  const handleChange = e => {
-    setTask(e.target.value)
-  }
+  //array that stores the tasks
+  const [list, setList] = useState([]);
 
   const handleClick = e => {
     e.preventDefault();
 
     console.log(`Task variable: ${task}`)
 
-    const item = {
+    const taskList = {
       id: Math.floor(Math.random() * 1000),
       value: task
     };
+    //adds task to the 
+    setList([...list, taskList]);
 
-    setItems(prevList => [...prevList, item]);
-    console.log(items)
+    console.log(list)
 
     setTask("");
 
@@ -33,19 +32,19 @@ function App() {
         <input
           type="text"
           value={task}
-          onChange={e => handleChange(e)}
+          onChange={e => setTask(e.target.value)}
         />
         <button
           onClick={e => handleClick(e)}
         >Add Task</button>
       </form>
       <ul>
-        {items.map(item => {
+        {list.map(taskList => {
           return (
             <li
-              key={item.id}
+              key={taskList.id}
             >
-              {item.value}</li>
+              {taskList.value}</li>
           )
         })}
       </ul>
