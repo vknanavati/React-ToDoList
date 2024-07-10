@@ -20,8 +20,8 @@ function App() {
     //adds task to the list of tasks
     setList([...list, taskObject]);
 
-    console.log(`useState variable "list": ${list}`)
-    console.log(`useState variable "taskList": ${taskList}`)
+    console.log("useState variable 'list': ", list)
+    console.log("taskObject:", taskObject)
 
     setTask("");
 
@@ -40,12 +40,12 @@ function App() {
         >Add Task</button>
       </form>
       <ul>
-        {list.map(taskList => {
+        {list.map(taskObject => {
           return (
             <li
-              key={taskList.id}
+              key={taskObject.id}
             >
-              {taskList.value}</li>
+              {taskObject.value}</li>
           )
         })}
       </ul>
