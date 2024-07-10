@@ -13,14 +13,15 @@ function App() {
 
     console.log(`Task variable: ${task}`)
 
-    const taskList = {
+    const taskObject = {
       id: Math.floor(Math.random() * 1000),
       value: task
     };
-    //adds task to the 
-    setList([...list, taskList]);
+    //adds task to the list of tasks
+    setList([...list, taskObject]);
 
-    console.log(list)
+    console.log(`useState variable "list": ${list}`)
+    console.log(`useState variable "taskList": ${taskList}`)
 
     setTask("");
 
