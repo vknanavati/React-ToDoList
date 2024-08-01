@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
-import {Container, Typography, Grid, Button, TextField, Box} from '@mui/material'
+import {ListItemText, List, ListItem, Paper, Container, Typography, Grid, Button, TextField, Box} from '@mui/material'
+import "./App.css"
 
 function App() {
   /* task is a state variable that stores the task
@@ -44,12 +45,10 @@ function App() {
       console.log('Input is more than 1')
       setErrorMessage(false)
     }
-
     setTask(e)
   }
 
-
-  /*event handler for the - button */
+  /*event handler for the Delete button */
   const removeTask = (e, id) => {
     e.preventDefault();
     const updatedList = list.filter((taskObject) => taskObject.id !== id);
@@ -57,6 +56,9 @@ function App() {
   }
   return (
     <Container>
+      <Paper
+        sx={{paddingBottom: 10, marginTop: 10, marginBottom: 10}}
+      >
       <Grid
       container
       justifyContent={"center"}
@@ -99,57 +101,70 @@ function App() {
                   },
                   fontWeight: 700
                 }}
-                //
                 disabled={errorMessage}
-                helperText={errorMessage}
-                error={errorMessage}
-
-                //
                 variant="outlined"
                 onClick={e => handleClick(e)}
+                type="submit"
               >
                 Add Task
               </Button>
             </Grid>
           </Grid>
         </form>
-        <ul>
+        </Grid>
+        </Paper>
+        <Container>
+        <Box
+          fontSize={27}>
           {list.map((taskObject, i) => {
             return (
-              <>
-              <Container>
+              <List>
                 <Box
-                display={"flex"}
-                gap={2}
-                my={2}
-                alignItems={"center"}
+                  display={"flex"}
+                  backgroundColor={"white"}
+                  justifyContent={"space-between"}
                 >
-                  <li
-                    key={taskObject.id}
-                    >
-                    {taskObject.value}
-                  </li>
-                  <Button
-                    sx={{
-                      height:30,
-                      minWidth: 0,
-                      color: "#ff7474",
-                      border: "3px #ff7474 solid",
-                      "&:hover": {
-                        border: "3px #ff7474 solid",
-                      },
-                    }}
-                    onClick={(e) => removeTask(e, taskObject.id)}
-                    variant="outlined"
-                    >
-                    -
-                  </Button>
+                  <Box
+                    display={"flex"}
+                    width={0}
+                  >
+                    <ListItem key={taskObject.id}>
+                      <ListItemText
+                        primary={taskObject.value}
+                        sx={{
+                          // color: 'blue'
+                          // whiteSpace: 'normal'
+
+                        }}
+                      />
+                    </ListItem>
+                  </Box>
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                  >
+                    <Button
+                      sx={{
+                        height:30,
+                        minWidth: 0,
+                        color: "#AC001E",
+                        border: "3px #AC001E solid",
+                        "&:hover": {
+                          border: "3px #AC001E solid",
+                        },
+                        marginRight: 2
+                      }}
+                      onClick={(e) => removeTask(e, taskObject.id)}
+                      variant="outlined"
+                      >
+                      Delete
+                    </Button>
+                  </Box>
                 </Box>
-              </Container>
-              </>
+            </List>
             )})}
-        </ul>
-      </Grid>
+            </Box>
+            </Container>
     </Container>
   );
 }
